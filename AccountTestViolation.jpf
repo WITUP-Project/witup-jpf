@@ -1,0 +1,6 @@
+# JPF config - exception propagates, so JPF reports it as property violation
+
+target = br.ufpe.cin.witup.jpf.AccountJPFDriverViolation
+classpath = ${witup-jpf}/target/classes
+
+search.multiple_errors = true
