@@ -23,6 +23,7 @@
             jdk8
             maven
             pkgs.ant
+            pkgs.python3
           ];
 
           # Ensure Java 8 is used (for JPF and Maven)
@@ -43,13 +44,13 @@
             echo -e "  ''${_dim}Java:''${_reset}  $(java -version 2>&1 | head -1)"
             echo -e "  ''${_dim}Maven:''${_reset} $(mvn -v 2>/dev/null | head -1 | sed 's/^  //')"
             echo ""
-            echo -e "  ''${_dim}Setup:''${_reset}   mvn compile  (jars pre-bundled in tools/jpf/lib/)"
-            echo -e "  ''${_dim}Run:''${_reset}    ./tools/run-jpf.sh AccountTestSymbolic.jpf   # for EXCEPTION CONDITIONS"
-            echo -e "  ''${_dim}Alias:''${_reset}  jpf <config>  →  ./tools/run-jpf.sh <config>"
+            echo -e "  ''${_dim}Setup:''${_reset}   mvn test-compile  (jars pre-bundled in tools/jpf/lib/)"
+            echo -e "  ''${_dim}Run:''${_reset}    python run_jpf.py -h  # list configs"
+            echo -e "  ''${_dim}Run:''${_reset}    python run_jpf.py AccountTestSymbolic.jpf"
             echo ""
 
-            # Prompt prefix to show we're in the dev shell
-            export PS1="\[''${_cyan}\][witup-jpf]\[''${_reset}\] $PS1"
+            # Prompt: [witup-jpf] path ❄ (❄ = Nix dev shell)
+            export PS1="\[''${_cyan}\][witup-jpf]\[''${_reset}\] \w ❄ "
 
             # Convenience alias
             alias jpf='./tools/run-jpf.sh'
