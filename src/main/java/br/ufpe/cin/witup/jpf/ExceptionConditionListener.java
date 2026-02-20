@@ -109,24 +109,14 @@ public class ExceptionConditionListener extends ListenerAdapter {
         private final String thrownException;
         private final String methodSignature;
         private final int lineNumber;
+        /** User-friendly condition (e.g. "value > this.balance"). */
         private final String condition;
-        private final String conditionFriendly;
 
-        public ExceptionSite(String thrownException, String methodSignature, int lineNumber, String condition, MethodInfo methodInfo) {
+        public ExceptionSite(String thrownException, String methodSignature, int lineNumber, String rawCondition, MethodInfo methodInfo) {
             this.thrownException = thrownException;
             this.methodSignature = methodSignature;
             this.lineNumber = lineNumber;
-            this.condition = condition;
-            this.conditionFriendly = formatConditionForUser(condition, methodInfo);
-        }
-
-        /** User-friendly condition (e.g. "value > balance" instead of "value_2_SYMREAL > balance_1_SYMREAL"). */
-        public String getConditionFriendly() {
-            return conditionFriendly;
-        }
-
-        public String getCondition() {
-            return condition;
+            this.condition = formatConditionForUser(rawCondition, methodInfo);
         }
 
         public String toJson() {
@@ -205,14 +195,12 @@ public class ExceptionConditionListener extends ListenerAdapter {
 
     /**
      * Iterates over exceptionSites and prints the JSON for each exception site.
-     * Uses conditionFriendly for readable output (e.g. "value > balance").
+     * Pretty-prints the JSON for readability.
      */
     private void reportSymbolicConditions() {
         System.out.println("\n========================================");
         System.out.println("EXCEPTION CONDITIONS (symbolic path conditions):");
-        for (ExceptionSite site : exceptionSites) {
-            System.out.println(site.toJson());
-        }
+        System.out.println(ExceptionSite.toJsonArray(exceptionSites, true));
         System.out.println("========================================\n");
     }
 }
