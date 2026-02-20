@@ -1,0 +1,24 @@
+# JPF configuration for StringUtils.requireEmpty(argument) symbolic execution
+# Run with: ./tools/run-jpf.sh StringUtilsTestSymbolic.jpf
+# NOTE: If you get empty EXCEPTION CONDITIONS, try StringUtilsLengthTestSymbolic.jpf instead.
+
+@include = ${config_path}/tools/jpf-bundled.properties
+
+target = br.ufpe.cin.witup.jpf.StringUtilsJPFDriverSymbolic
+listener = br.ufpe.cin.witup.jpf.ExceptionConditionListener
+
+# Symbolic string parameter for run(argument)
+symbolic.method = br.ufpe.cin.witup.jpf.StringUtilsJPFDriverSymbolic.run(sym)
+
+# String symbolic execution (required for symbolic String parameters)
+symbolic.dp = choco
+symbolic.string_dp = automata
+symbolic.string_dp_timeout_ms = 3000
+
+# Allow deeper exploration (string constraints can create many branches)
+search.depth_limit = 15
+
+search.multiple_errors = true
+
+# Uncomment to debug: see symbolic method invocations and path conditions
+# symbolic.debug = true

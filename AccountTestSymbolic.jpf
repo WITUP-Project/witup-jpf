@@ -1,18 +1,12 @@
 # JPF configuration for Account symbolic execution (jpf-symbc)
 # Uses symbolic.method to make run(balance, value) parameters symbolic.
 # ExceptionConditionListener collects path conditions when exceptions occur.
+# Run with: ./tools/run-jpf.sh AccountTestSymbolic.jpf
+
+@include = ${config_path}/tools/jpf-bundled.properties
 
 target = br.ufpe.cin.witup.jpf.AccountJPFDriverSymbolic
-classpath = ${witup-jpf}/target/classes
-
-jpf-core.native_classpath = ${jpf-core}/build/jpf.jar;${jpf-core}/build/jpf-annotations.jar;${witup-jpf}/target/classes;${user.home}/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar
-
 listener = br.ufpe.cin.witup.jpf.ExceptionConditionListener
-
-# Enable symbolic execution (required for PCChoiceGenerator)
-jvm.insn_factory.class = gov.nasa.jpf.symbc.SymbolicInstructionFactory
-vm.peer.packages = gov.nasa.jpf.symbc,gov.nasa.jpf.jvm
-vm.storage.class = nil
 
 # Symbolic parameters for run(balance, value)
 symbolic.method = br.ufpe.cin.witup.jpf.AccountJPFDriverSymbolic.run(sym#sym)

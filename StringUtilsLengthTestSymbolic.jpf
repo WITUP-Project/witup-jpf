@@ -1,0 +1,15 @@
+# JPF configuration for StringUtils.requireLengthZero(length) - int-based variant
+# Run with: ./tools/run-jpf.sh StringUtilsLengthTestSymbolic.jpf
+
+@include = ${config_path}/tools/jpf-bundled.properties
+
+target = br.ufpe.cin.witup.jpf.StringUtilsLengthJPFDriverSymbolic
+listener = br.ufpe.cin.witup.jpf.ExceptionConditionListener
+
+# Symbolic int parameter for run(length)
+symbolic.method = br.ufpe.cin.witup.jpf.StringUtilsLengthJPFDriverSymbolic.run(sym)
+
+search.multiple_errors = true
+
+symbolic.min_int = -10
+symbolic.max_int = 10

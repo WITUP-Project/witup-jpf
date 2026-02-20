@@ -1,0 +1,2 @@
+# Use Java 8 for JPF (requires sun.misc.SharedSecrets, removed in Java 9+)
+java=8.0.422-amzn

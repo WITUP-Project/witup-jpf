@@ -1,18 +1,10 @@
 # JPF configuration for Math.requireBothNonNegative(a, b) - single if with &&
-# Uses symbolic.method to make run(a, b) parameters symbolic.
-# ExceptionConditionListener collects path conditions (e.g. a < 0 && b < 0) when exceptions occur.
+# Run with: ./tools/run-jpf.sh MathConjunctionTestSymbolic.jpf
+
+@include = ${config_path}/tools/jpf-bundled.properties
 
 target = br.ufpe.cin.witup.jpf.MathConjunctionJPFDriverSymbolic
-classpath = ${witup-jpf}/target/classes
-
-jpf-core.native_classpath = ${jpf-core}/build/jpf.jar;${jpf-core}/build/jpf-annotations.jar;${witup-jpf}/target/classes;${user.home}/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar
-
 listener = br.ufpe.cin.witup.jpf.ExceptionConditionListener
-
-# Enable symbolic execution (required for PCChoiceGenerator)
-jvm.insn_factory.class = gov.nasa.jpf.symbc.SymbolicInstructionFactory
-vm.peer.packages = gov.nasa.jpf.symbc,gov.nasa.jpf.jvm
-vm.storage.class = nil
 
 # Symbolic parameters for run(a, b)
 symbolic.method = br.ufpe.cin.witup.jpf.MathConjunctionJPFDriverSymbolic.run(sym#sym)
