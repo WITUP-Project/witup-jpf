@@ -10,29 +10,22 @@ Bundled JPF (jpf-core + jpf-symbc) for self-contained symbolic execution.
 
 ## Setup
 
-1. **Build jpf-core and jpf-symbc** (in sibling directories):
+The JPF jars are pre-bundled in `tools/jpf/lib/`; no need to build jpf-core or jpf-symbc.
 
-   ```bash
-   cd ../jpf-core && ant && cd ../jpf-symbc && ant
-   ```
-
-2. **Copy jars** into `tools/jpf/lib/`:
-
-   ```bash
-   ./tools/copy-jpf.sh
-   ```
-
-   Or via Maven (runs copy before compile):
-
-   ```bash
-   mvn compile -Pjpf-bundle
-   ```
-
-3. **Compile the project**:
+1. **Compile the project**:
 
    ```bash
    mvn compile
    ```
+
+2. **Optional** – refresh bundled jars from a local jpf-core/jpf-symbc build:
+
+   ```bash
+   cd ../jpf-core && ant && cd ../jpf-symbc && ant
+   ./tools/copy-jpf.sh
+   ```
+
+   Or via Maven: `mvn compile -Pjpf-bundle` (runs copy before compile).
 
 ## Run JPF
 
@@ -56,7 +49,7 @@ For **EXCEPTION CONDITIONS** (symbolic path conditions like `value > this.balanc
 
 ```bash
 nix develop
-# then: ./tools/copy-jpf.sh && mvn compile && ./tools/run-jpf.sh AccountTestSymbolic.jpf
+# then: mvn compile && ./tools/run-jpf.sh AccountTestSymbolic.jpf
 ```
 
 Works on macOS and Linux. The flake provides Java 8, Maven, and Ant.
