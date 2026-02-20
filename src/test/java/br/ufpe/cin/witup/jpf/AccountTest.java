@@ -1,7 +1,7 @@
 package br.ufpe.cin.witup.jpf;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,14 +17,8 @@ public class AccountTest {
      */
     @Test
     public void testDebitOperation() {
-        try {
-            Account account = new Account(initialBalance);
-            if (!account.debit(100)) {
-                throw new Exception("Debit operation failed");
-            }
-            assertTrue(true);
-        } catch (Exception e) {
-            fail();
-        }
+        Account account = new Account(initialBalance);
+        assertDoesNotThrow(() -> account.debit(50));
+        assertTrue(account.transfer(new Account(0), 50));
     }
 }

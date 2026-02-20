@@ -18,6 +18,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <jpf-core.path>${project.basedir}/../jpf-core</jpf-core.path>
     <jpf-symbc.path>${project.basedir}/../jpf-symbc</jpf-symbc.path>
+    <jpf-bundled.path>${project.basedir}/tools/jpf/lib</jpf-bundled.path>
   </properties>
 
   <dependencyManagement>
@@ -44,14 +45,14 @@
       <artifactId>jpf</artifactId>
       <version>1.0</version>
       <scope>system</scope>
-      <systemPath>${jpf-core.path}/build/jpf.jar</systemPath>
+      <systemPath>${jpf-bundled.path}/jpf.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>gov.nasa.jpf</groupId>
       <artifactId>jpf-symbc</artifactId>
       <version>1.0</version>
       <scope>system</scope>
-      <systemPath>${jpf-symbc.path}/build/jpf-symbc.jar</systemPath>
+      <systemPath>${jpf-bundled.path}/jpf-symbc.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>

@@ -2,7 +2,7 @@
 # Run with: ./tools/run-jpf.sh StringUtilsTestSymbolic.jpf
 # NOTE: If you get empty EXCEPTION CONDITIONS, try StringUtilsLengthTestSymbolic.jpf instead.
 
-@include = ${config_path}/tools/jpf-bundled.properties
+@include = ${config_path}/../../../../tools/jpf-bundled.properties
 
 target = br.ufpe.cin.witup.jpf.StringUtilsJPFDriverSymbolic
 listener = br.ufpe.cin.witup.jpf.ExceptionConditionListener

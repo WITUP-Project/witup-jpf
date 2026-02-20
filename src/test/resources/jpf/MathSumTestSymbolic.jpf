@@ -1,7 +1,7 @@
 # JPF configuration for Math.sum(a, b) symbolic execution (jpf-symbc)
 # Run with: ./tools/run-jpf.sh MathSumTestSymbolic.jpf
 
-@include = ${config_path}/tools/jpf-bundled.properties
+@include = ${config_path}/../../../../tools/jpf-bundled.properties
 
 target = br.ufpe.cin.witup.jpf.MathSumJPFDriverSymbolic
 listener = br.ufpe.cin.witup.jpf.ExceptionConditionListener

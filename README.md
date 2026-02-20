@@ -12,10 +12,10 @@ Bundled JPF (jpf-core + jpf-symbc) for self-contained symbolic execution.
 
 The JPF jars are pre-bundled in `tools/jpf/lib/`; no need to build jpf-core or jpf-symbc.
 
-1. **Compile the project**:
+1. **Compile the project** (includes test classes for JPF drivers):
 
    ```bash
-   mvn compile
+   mvn test-compile
    ```
 
 2. **Optional** – refresh bundled jars from a local jpf-core/jpf-symbc build:
@@ -29,15 +29,16 @@ The JPF jars are pre-bundled in `tools/jpf/lib/`; no need to build jpf-core or j
 
 ## Run JPF
 
-For **EXCEPTION CONDITIONS** (symbolic path conditions like `value > this.balance`), use the `*Symbolic.jpf` configs:
+Configs live in `src/test/resources/jpf/`. Use `run_jpf.py` for a friendly interface:
 
 ```bash
-./tools/run-jpf.sh AccountTestSymbolic.jpf
-./tools/run-jpf.sh MathTestSymbolic.jpf
-./tools/run-jpf.sh StringUtilsLengthTestSymbolic.jpf
+python run_jpf.py -h              # List available configs with descriptions
+python run_jpf.py AccountTestSymbolic.jpf
 ```
 
-`AccountTest.jpf` (concrete via `Verify.getInt()`) explores many paths but does not produce symbolic conditions.
+Or run directly: `./tools/run-jpf.sh AccountTestSymbolic.jpf`
+
+For **EXCEPTION CONDITIONS** (symbolic path conditions like `value > this.balance`), use the `*Symbolic.jpf` configs. `AccountTest.jpf` (concrete) explores many paths but does not produce symbolic conditions.
 
 ## Bundled Jars (minimal set)
 
@@ -49,7 +50,7 @@ For **EXCEPTION CONDITIONS** (symbolic path conditions like `value > this.balanc
 
 ```bash
 nix develop
-# then: mvn compile && ./tools/run-jpf.sh AccountTestSymbolic.jpf
+# then: mvn test-compile && ./tools/run-jpf.sh AccountTestSymbolic.jpf
 ```
 
 Works on macOS and Linux. The flake provides Java 8, Maven, and Ant.

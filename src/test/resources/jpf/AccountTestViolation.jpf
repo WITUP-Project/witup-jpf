@@ -1,6 +1,8 @@
 # JPF config - exception propagates, so JPF reports it as property violation
+# Run with: ./tools/run-jpf.sh AccountTestViolation.jpf
+
+@include = ${config_path}/../../../../tools/jpf-bundled.properties
 
 target = br.ufpe.cin.witup.jpf.AccountJPFDriverViolation
-classpath = ${witup-jpf}/target/classes
 
 search.multiple_errors = true

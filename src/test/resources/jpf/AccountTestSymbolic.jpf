@@ -3,7 +3,7 @@
 # ExceptionConditionListener collects path conditions when exceptions occur.
 # Run with: ./tools/run-jpf.sh AccountTestSymbolic.jpf
 
-@include = ${config_path}/tools/jpf-bundled.properties
+@include = ${config_path}/../../../../tools/jpf-bundled.properties
 
 target = br.ufpe.cin.witup.jpf.AccountJPFDriverSymbolic
 listener = br.ufpe.cin.witup.jpf.ExceptionConditionListener

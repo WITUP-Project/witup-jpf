@@ -1,7 +1,7 @@
 # JPF configuration for Math.sqrt symbolic execution (jpf-symbc)
 # Run with: ./tools/run-jpf.sh MathTestSymbolic.jpf
 
-@include = ${config_path}/tools/jpf-bundled.properties
+@include = ${config_path}/../../../../tools/jpf-bundled.properties
 
 target = br.ufpe.cin.witup.jpf.MathJPFDriverSymbolic
 listener = br.ufpe.cin.witup.jpf.ExceptionConditionListener
