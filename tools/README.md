@@ -36,11 +36,15 @@ Bundled JPF (jpf-core + jpf-symbc) for self-contained symbolic execution.
 
 ## Run JPF
 
+For **EXCEPTION CONDITIONS** (symbolic path conditions like `value > this.balance`), use the `*Symbolic.jpf` configs:
+
 ```bash
 ./tools/run-jpf.sh AccountTestSymbolic.jpf
 ./tools/run-jpf.sh MathTestSymbolic.jpf
 ./tools/run-jpf.sh StringUtilsLengthTestSymbolic.jpf
 ```
+
+`AccountTest.jpf` (concrete via `Verify.getInt()`) explores many paths but does not produce symbolic conditions.
 
 ## Bundled Jars (minimal set)
 

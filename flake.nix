@@ -29,12 +29,30 @@
           JAVA_HOME = "${jdk8}";
 
           shellHook = ''
-            echo "witup-jpf dev shell"
-            echo "  Java: $(java -version 2>&1 | head -1)"
-            echo "  Maven: $(mvn -v | head -1)"
+            # Colors (use ''$ to escape dollar for Nix)
+            _cyan='\033[0;36m'
+            _green='\033[0;32m'
+            _dim='\033[0;2m'
+            _reset='\033[0m'
+
             echo ""
-            echo "Setup: ./tools/copy-jpf.sh  (requires jpf-core, jpf-symbc in ../)"
-            echo "Run:   ./tools/run-jpf.sh AccountTestSymbolic.jpf"
+            echo -e "''${_cyan}╭─────────────────────────────────────────────────────────╮''${_reset}"
+            echo -e "''${_cyan}│''${_reset}  ''${_green}witup-jpf''${_reset}  JPF symbolic execution (exception conditions)  ''${_cyan}│''${_reset}"
+            echo -e "''${_cyan}╰─────────────────────────────────────────────────────────╯''${_reset}"
+            echo ""
+            echo -e "  ''${_dim}Java:''${_reset}  $(java -version 2>&1 | head -1)"
+            echo -e "  ''${_dim}Maven:''${_reset} $(mvn -v 2>/dev/null | head -1 | sed 's/^  //')"
+            echo ""
+            echo -e "  ''${_dim}Build:''${_reset}  mvn compile"
+            echo -e "  ''${_dim}Run:''${_reset}    ./tools/run-jpf.sh AccountTestSymbolic.jpf   # for EXCEPTION CONDITIONS"
+            echo -e "  ''${_dim}Alias:''${_reset}  jpf <config>  →  ./tools/run-jpf.sh <config>"
+            echo ""
+
+            # Prompt prefix to show we're in the dev shell
+            export PS1="\[''${_cyan}\][witup-jpf]\[''${_reset}\] $PS1"
+
+            # Convenience alias
+            alias jpf='./tools/run-jpf.sh'
           '';
         };
       }

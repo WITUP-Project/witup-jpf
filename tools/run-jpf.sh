@@ -1,7 +1,9 @@
 #!/bin/bash
 # Runs JPF using bundled jars in tools/jpf/lib/.
 # Usage: ./tools/run-jpf.sh <config.jpf> [JPF options...]
-# Example: ./tools/run-jpf.sh AccountTestSymbolic.jpf
+# Examples:
+#   ./tools/run-jpf.sh AccountTestSymbolic.jpf   # symbolic → EXCEPTION CONDITIONS
+#   ./tools/run-jpf.sh AccountTest.jpf          # concrete  → no path conditions
 
 set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

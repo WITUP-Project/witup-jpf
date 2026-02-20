@@ -1,18 +1,13 @@
-# JPF configuration for Account exception condition analysis (concrete exploration)
-# Uses Verify.getInt() + ExceptionConditionListener.
-# For symbolic path conditions, use AccountTestSymbolic.jpf instead.
+# JPF configuration for Account (concrete exploration via Verify.getInt).
+# Explores many concrete (balance, value) pairs; EXCEPTION CONDITIONS stays empty
+# because the listener only collects symbolic path conditions.
+#
+# For EXCEPTION CONDITIONS (e.g. "value > this.balance"), use:
+#   ./tools/run-jpf.sh AccountTestSymbolic.jpf
+
+@include = ${config_path}/tools/jpf-bundled.properties
 
 target = br.ufpe.cin.witup.jpf.AccountJPFDriver
-classpath = ${witup-jpf}/target/classes
-
-# Add witup-jpf and Gson to JPF classpath so it can load the listener
-jpf-core.native_classpath = ${jpf-core}/build/jpf.jar;${jpf-core}/build/jpf-annotations.jar;${witup-jpf}/target/classes;${user.home}/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar
-
-# Listener infers and prints the exception condition (e.g. initialBalance < 100)
 listener = br.ufpe.cin.witup.jpf.ExceptionConditionListener
 
-# Find all paths (including exception path)
 search.multiple_errors = true
-
-# Limit search depth to avoid exploring all 201 values (optional - remove for full exploration)
-# search.depth_limit = 10
